@@ -1,13 +1,9 @@
 #ifndef _MYGL_H_
 #define _MYGL_H_
 
-#include "definitions.h"
-#include <stdio.h>
 #include <math.h>
-
-//*****************************************************************************
-// Defina aqui as suas funções gráficas
-//*****************************************************************************
+#include "definitions.h"
+#include "pipeline.hpp"
 
 typedef struct {
 	int x,y;
@@ -19,8 +15,9 @@ color red = {255,0,0,255};
 color green = {0,255,0,255};
 color blue = {0,0,255,255};
 
-
-
+//#######################################################
+	//primitivas:
+ 
 void putPixel(int x, int y, color c) {
 	FBptr[x*4 + y*4*IMAGE_WIDTH] = c[0];
 	FBptr[x*4 + y*4*IMAGE_WIDTH + 1] = c[1];
@@ -133,6 +130,114 @@ void drawLine(pixel i,pixel f, color c) {
 			
 			putPixel(x,y,c);
 			while(y < f.y){
+				if(d <= 0){
+					y++;
+					x++;
+					d += ne_inc;
+				}
+				else {
+					y++;
+					d += n_inc;
+				}
+				putPixel(x,y,c);
+			}	
+		}
+
+	} 
+}
+
+void drawLine2(int xi,int yi, int xf, int yf, color c) {
+	// Coordenadas iniciais
+	int x = xi;
+	int y = yi;
+	//Deslocamentos
+	int dx = xf - xi;
+	int dy = yf - yi;
+	
+	if(abs(dx) > abs(dy)){
+		//1 Octante
+		if(dx > 0 && dy > 0) {
+			int d = 2*dy - dx;
+			int e_inc = 2*dy;
+			int ne_inc = 2*(dy - dx);
+			
+			putPixel(x,y,c);			
+			while(x < xf){
+				if(d <= 0){
+					x++;
+					d += e_inc;			
+				}
+				else{
+					x++;
+					y++;
+					d += ne_inc;			
+				}
+				putPixel(x,y,c);
+			}
+		}
+
+		//4 e 5 Octantes 
+		else if(dx < 0) {
+			drawLine2(xf,yf,xi,yi,c);
+		}
+
+		//8 Octante e Linhas Horizontais
+		else {
+			int d = 2*dy + dx;
+			int e_inc = 2*dy;
+			int se_inc = 2*(dy + dx);
+			
+			putPixel(x,y,c);			
+			while(x < xf){
+				if(d <= 0){
+					x++;
+					y--;
+					d += se_inc;			
+				}
+				else{
+					x++;
+					d += e_inc;			
+				}
+				putPixel(x,y,c);
+			}
+		}
+	}
+
+	else {
+		//7 Octante
+		if(dx > 0 && dy < 0) {
+			int d = dy + 2*dx;
+			int s_inc =  2*dx;
+			int se_inc = 2*(dy + dx);
+			
+			putPixel(x,y,c);
+			while(y > yf){
+				if(d <= 0){
+					y--;
+					d += s_inc;
+				}
+				else {
+					x++;
+					y--;
+					d += se_inc;
+				}
+				putPixel(x,y,c);
+			}
+		}
+
+		//3 e 6 Octantes
+		else if(dx < 0 || (xi == xf && yi > yf)){
+			drawLine2(xf,yf,xi,yi,c);
+		}
+
+		//2 Octante e linah verticais
+		else {
+			int d = dy + 2*-dx;
+			int n_inc =  2*-dx;
+			int ne_inc = 2*(dy - dx);
+			
+			putPixel(x,y,c);
+			while(y < yf){
 				if(d <= 0){
 					y++;
 					x++;
@@ -291,6 +396,9 @@ void drawTriangleInterpolado(pixel v1 ,color c1 ,pixel v2 ,color c2 , pixel v3,c
 	drawLineInterpolado(v2,v3,c2,c3);
 }
 
+//#######################################################
+	//Uteis:
+
 void demo() {
 	pixel i;
 	pixel m;
@@ -387,6 +495,80 @@ void demo() {
 	}
 }
 
+void drawAxis() {
+	pixel pi ,pf;
+	pi.x = pf.x = 256;
+	pi.y = 0;
+	pf.y = 511;
+	drawLine(pi,pf, red);
+	pi.y = pf.y = 256;
+	pi.x = 0;
+	pf.x = 511;
+	drawLine(pi,pf, green);
+}
 
+void cube(Pipeline p) {
+	std::vector<glm::vec4> vertices(8);
+	vertices[0] = glm::vec4(-1,-1,-1, 1);
+	vertices[1] = glm::vec4(-1,-1, 1, 1);
+	vertices[2] = glm::vec4( 1,-1,-1, 1);
+	vertices[3] = glm::vec4( 1,-1, 1, 1);
+	vertices[4] = glm::vec4(-1, 1,-1, 1);
+	vertices[5] = glm::vec4(-1, 1, 1, 1);
+	vertices[6] = glm::vec4( 1, 1,-1, 1);
+	vertices[7] = glm::vec4( 1, 1, 1, 1);
+
+	vertices = p.transformMesh(vertices);
+
+	pixel i = {(int)vertices[0].x,(int)vertices[0].y};
+	pixel f = {(int)vertices[1].x,(int)vertices[1].y};
+	drawLine(i,f,blue);
+	i = {(int)vertices[0].x,(int)vertices[0].y};
+	f = {(int)vertices[2].x,(int)vertices[2].y};
+	drawLine(i,f,blue);
+	i = {(int)vertices[1].x,(int)vertices[1].y};
+	f = {(int)vertices[3].x,(int)vertices[3].y};
+	drawLine(i,f,blue);
+	i = {(int)vertices[2].x,(int)vertices[2].y};
+	f = {(int)vertices[3].x,(int)vertices[3].y};
+	drawLine(i,f,blue);
+	i = {(int)vertices[4].x,(int)vertices[4].y};
+	f = {(int)vertices[5].x,(int)vertices[5].y};
+	drawLine(i,f,blue);
+	i = {(int)vertices[4].x,(int)vertices[4].y};
+	f = {(int)vertices[6].x,(int)vertices[6].y};
+	drawLine(i,f,blue);
+	i = {(int)vertices[5].x,(int)vertices[5].y};
+	f = {(int)vertices[7].x,(int)vertices[7].y};
+	drawLine(i,f,blue);
+	i = {(int)vertices[6].x,(int)vertices[6].y};
+	f = {(int)vertices[7].x,(int)vertices[7].y};
+	drawLine(i,f,blue);
+	i = {(int)vertices[0].x,(int)vertices[0].y};
+	f = {(int)vertices[4].x,(int)vertices[4].y};
+	drawLine(i,f,blue);
+	i = {(int)vertices[1].x,(int)vertices[1].y};
+	f = {(int)vertices[5].x,(int)vertices[5].y};
+	drawLine(i,f,blue);
+	i = {(int)vertices[2].x,(int)vertices[2].y};
+	f = {(int)vertices[6].x,(int)vertices[6].y};
+	drawLine(i,f,blue);
+	i = {(int)vertices[3].x,(int)vertices[3].y};
+	f = {(int)vertices[7].x,(int)vertices[7].y};
+	drawLine(i,f,blue);
+}
+
+void drawMesh(std::vector<glm::vec4> vertices) {
+	pixel pi,pm,pf;
+	for (int i = 0; i < vertices.size(); i+=3) {
+		pi.x = (int) vertices[i].x;
+		pi.y = (int) vertices[i].y;
+		pm.x = (int) vertices[i+1].x;
+		pm.y = (int) vertices[i+1].y;
+		pf.x = (int) vertices[i+2].x;
+		pf.y = (int) vertices[i+2].y;
+		drawTriangle(pi,pm,pf,blue);
+	}
+}
 
 #endif // _MYGL_H_
