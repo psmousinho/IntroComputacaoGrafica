@@ -367,10 +367,10 @@ std::vector<glm::vec4> transformMesh(std::vector<glm::vec4> vertices) {
 Aqui podemos ver os resultados do nosso pipeline em comparação com a rasterização do openGl. Nossos modelos estão em azul e os do openGl em vermelho.
 
 ![alt text](https://github.com/psmousinho/IntroComputacaoGrafica/raw/master/Fotos/SuzannePOV1.png "Suzanne POV 2")
-![alt text](https://github.com/psmousinho/IntroComputacaoGrafica/raw/master/Fotos/SuzannePOV2.png "Suzanne POV 2")
+![alt text](https://github.com/psmousinho/IntroComputacaoGrafica/raw/master/Fotos/SuzannePOV2.png "Suzzanne POV 2")
 ![alt text](https://github.com/psmousinho/IntroComputacaoGrafica/raw/master/Fotos/SuzanneEscala.png "Suzanne Escalada ")
 ![alt text](https://github.com/psmousinho/IntroComputacaoGrafica/raw/master/Fotos/EsferaPOV1 "Esfera POV 1")
-![alt text](https://github.com/psmousinho/IntroComputacaoGrafica/raw/master/Fotos/EsferaPOV2 "Esfera POV 2")
+![alt text](https://github.com/psmousinho/IntroComputacaoGrafica/raw/master/Fotos/EsferaPOV2.png "Esfera POV 2")
 
 
 
