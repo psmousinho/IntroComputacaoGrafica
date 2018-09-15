@@ -203,11 +203,11 @@ putPixel(x,y,atual);
 ### Resultados:
 Os resultados desse projeto podem ser vistos nas imagens abaixo. Os maiores desafios desse projeto foram o desenvolvimento matematico da generalização do algoritmo de Breseham e o algoritmo de interpolação de cores.
 
-![alt text](https://github.com/avillasilva/CG/raw/master/Fotos/retas.png "Retas")
-![alt text](https://github.com/avillasilva/CG/raw/master/Fotos/triangulo.png "Triângulo")
-![alt text](https://github.com/avillasilva/CG/raw/master/Fotos/reatasinter.png "Retas interpoladas")
-![alt text](https://github.com/avillasilva/CG/raw/master/Fotos/triangulointer.png "Triângulo interpolado")
-![alt text](https://github.com/avillasilva/CG/raw/master/Fotos/demo.png "Demostração")
+![alt text](https://github.com/psmousinho/IntroComputacaoGrafica/raw/master/Fotos/retas.png "Retas")
+![alt text](https://github.com/psmousinho/IntroComputacaoGrafica/raw/master/Fotos/triangulo.png "Triângulo")
+![alt text](https://github.com/psmousinho/IntroComputacaoGrafica/raw/master/Fotos/reatasinter.png "Retas interpoladas")
+![alt text](https://github.com/psmousinho/IntroComputacaoGrafica/raw/master/Fotos/triangulointer.png "Triângulo interpolado")
+![alt text](https://github.com/psmousinho/IntroComputacaoGrafica/raw/master/Fotos/demo.png "Demostração")
 
 ## Modelos:
 
@@ -366,11 +366,11 @@ std::vector<glm::vec4> transformMesh(std::vector<glm::vec4> vertices) {
 ### Resultados:
 Aqui podemos ver os resultados do nosso pipeline em comparação com a rasterização do openGl. Nossos modelos estão em azul e os do openGl em vermelho.
 
-![alt text](https://github.com/avillasilva/CG/raw/master/Fotos/SuzannePOV1.png "Suzanne POV 2")
-![alt text](https://github.com/avillasilva/CG/raw/master/Fotos/SuzannePOV2.png "Suzanne POV 2")
-![alt text](https://github.com/avillasilva/CG/raw/master/Fotos/SuzanneEscala.png "Suzanne Escalada ")
-![alt text](https://github.com/avillasilva/CG/raw/master/Fotos/EsferaPOV1 "Esfera POV 1")
-![alt text](https://github.com/avillasilva/CG/raw/master/Fotos/EsferaPOV2 "Esfera POV 2")
+![alt text](https://github.com/psmousinho/IntroComputacaoGrafica/raw/master/Fotos/SuzannePOV1.png "Suzanne POV 2")
+![alt text](https://github.com/psmousinho/IntroComputacaoGrafica/raw/master/Fotos/SuzannePOV2.png "Suzanne POV 2")
+![alt text](https://github.com/psmousinho/IntroComputacaoGrafica/raw/master/Fotos/SuzanneEscala.png "Suzanne Escalada ")
+![alt text](https://github.com/psmousinho/IntroComputacaoGrafica/raw/master/Fotos/EsferaPOV1 "Esfera POV 1")
+![alt text](https://github.com/psmousinho/IntroComputacaoGrafica/raw/master/Fotos/EsferaPOV2 "Esfera POV 2")
 
 
 
