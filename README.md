@@ -1,9 +1,9 @@
 # Introdução À Computação Gráfica 2018.1 
 
 
-#### Contents
-[1. Primitivas](https://github.com/psmousinho/IntroComputacaoGrafica#Primitivas) <br>
-[2. Modelos](https://github.com/DefinitelyNotACactus/IntroComputacaoGrafica#function-putpixel) <br>
+#### Conteudo
+[1. Primitivas](https://github.com/psmousinho/IntroComputacaoGrafica#primitivas) <br>
+[2. Modelos](https://github.com/psmousinho/IntroComputacaoGrafica#modelos <br>
 
 ### Introdução:
 O objetivo da primeira parte deste projeto é a rasterização de primitivas usando o algoritmo de Brasenham. Para esta tarefa utilizamos um framework desenvolvido pelo Prof. Christian Pagot que emula o acesso direto a memória de vídeo do computador via o ponteiro FBptr. Na segunda parte deste projeto, emulamos o pipleline gráfico para podermos rasterizar modelos mais complexos utilizando as primitivas ja desenvolvidas. 
@@ -207,6 +207,9 @@ Os resultados desse projeto podem ser vistos nas imagens abaixo. Os maiores desa
 ![alt text](https://github.com/avillasilva/CG/raw/master/Fotos/reatasinter.png "Retas interpoladas")
 ![alt text](https://github.com/avillasilva/CG/raw/master/Fotos/triangulointer.png "Triângulo interpolado")
 ![alt text](https://github.com/avillasilva/CG/raw/master/Fotos/demo.png "Demostração")
+
+
+## Modelos:
 
 ### Bibliografia:
 [1] https://medium.com/@biancaamoriim/rasteriza%C3%A7%C3%A3o-de-primitivas-em-opengl-8680a76fdda5
