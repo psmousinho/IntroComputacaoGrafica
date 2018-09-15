@@ -2,13 +2,13 @@
 
 
 #### Contents
-[1. Primitivas](https://github.com/DefinitelyNotACactus/IntroComputacaoGrafica#Primitivas) <br>
+[1. Primitivas](https://github.com/psmousinho/IntroComputacaoGrafica#Primitivas) <br>
 [2. Modelos](https://github.com/DefinitelyNotACactus/IntroComputacaoGrafica#function-putpixel) <br>
 
 ### Introdução:
 O objetivo da primeira parte deste projeto é a rasterização de primitivas usando o algoritmo de Brasenham. Para esta tarefa utilizamos um framework desenvolvido pelo Prof. Christian Pagot que emula o acesso direto a memória de vídeo do computador via o ponteiro FBptr. Na segunda parte deste projeto, emulamos o pipleline gráfico para podermos rasterizar modelos mais complexos utilizando as primitivas ja desenvolvidas. 
 
-##Primitivas:
+## Primitivas:
 ### Rasterização de um ponto:
 Desenvolvemos uma função chamada putPixel que recebe como parâmetro  dois inteiros representando as coordenadas de um pixel e um array de quatro inteiros que representam os valore de RGBA que queremos representar nessas coordenadas.
 
