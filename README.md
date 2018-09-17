@@ -215,7 +215,7 @@ Os resultados desse projeto podem ser vistos nas imagens abaixo. Os maiores desa
 O pipeline gráfico é uma sequência de transformações geométricas que levam a descrição matemática de um modelo do espaço onde ele é desenvolvido (espaco do objeto) para o espaço que representa a tela do computador(espaço de tela). Nosso pipeline é composto de 4 multiplicações por matrizes e uma divisão por escalar. Esse pipeline foi implementado dentro de uma classe. Dentro desta classe temos métodos para Configurar e acessar as 4 matrizes utilizadas no pipeline.
 
 #### Matriz model:
-essa matriz é responsável por levar a descrição do objeto do espaço do objeto paras o espaço do mundo onde são colocados todos os  objetos que queremos dentro de uma cena. Essa matriz pode ser acessada e modificada pelos métodos a seguir:
+essa matriz é responsável por levar a descrição do objeto do espaço do objeto paras o espaço do mundo onde são colocados todos os  objetos que queremos dentro de uma cena. Essa matriz é composta de translações, rotaçoes, escalas e cisalhamentos. Ela pode ser acessada e modificada pelos métodos a seguir:
 
 ```C++
 void setModel(glm::mat4 mat) {
@@ -224,6 +224,49 @@ void setModel(glm::mat4 mat) {
 
 glm::mat4 getModel() {
 	return this->model;
+}
+
+void translate(float x ,float y , float z) {
+	glm::mat4 T(1.0f);
+	T[0].w = x;
+	T[1].w = y;
+	T[2].w = z;
+	this->model = model * T;
+}
+
+void scale(float x, float y,float z) {
+	glm::mat4 S(1.0f);
+	if(x != 0){
+		S[0].x = x;
+	}
+	if(y != 0) {
+		S[1].y = y;
+	}
+	if(z != 0) {
+		S[2].z = z;
+	}
+	this->model = model * S;
+}
+
+void rotate(int eixo, float graus) {
+	glm::mat4 R(1.0f);
+	graus = (graus * 3.14)/180;
+	switch(eixo) {
+		case 0: 
+			R[1] = glm::vec4(0,cos(graus),-sin(graus),0);
+			R[2] = glm::vec4(0,sin(graus),cos(graus),0);	
+			break;
+		case 1:
+			R[0] = glm::vec4(cos(graus),0,sin(graus),0);
+			R[2] = glm::vec4(-sin(graus),0,cos(graus),0);
+			break;
+		case 2:
+			R[0] = glm::vec4(cos(graus),-sin(graus),0,0);
+			R[1] = glm::vec4(sin(graus),cos(graus),0,0);
+			break;
+	}
+
+	this->model = model * R;
 }
 ```
 
@@ -355,11 +398,13 @@ std::vector<glm::vec4> loadMesh(const std::string &file_name ) {
 }
 
 std::vector<glm::vec4> transformMesh(std::vector<glm::vec4> vertices) {
+	glm::mat4 mat = getPipelineMatriz();
 	for(int i = 0; i < vertices.size(); i++) {
-		vertices[i] = vertices[i] * getPipelineMatriz();
+		vertices[i] = vertices[i] * mat;
 		vertices[i] = vertices[i] / vertices[i].w;
 	}
 	return vertices;
+}return vertices;
 }
 ```
 
