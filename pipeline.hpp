@@ -8,6 +8,9 @@ using namespace std;
 
 class Pipeline {
 	public:
+		const int X = 0;
+		const int Y = 1;
+		const int Z = 2;
 
 		Pipeline(int width, int height) {
 			glm::mat4 S1 = glm::mat4(1.0);
@@ -136,12 +139,56 @@ class Pipeline {
 		}
 
 		std::vector<glm::vec4> transformMesh(std::vector<glm::vec4> vertices) {
+			glm::mat4 mat = getPipelineMatriz();
 			for(int i = 0; i < vertices.size(); i++) {
-				vertices[i] = vertices[i] * getPipelineMatriz();
+				vertices[i] = vertices[i] * mat;
 				vertices[i] = vertices[i] / vertices[i].w;
 			}
 			return vertices;
-		}					
+		}	
+
+		void translate(float x ,float y , float z) {
+			glm::mat4 T(1.0f);
+			T[0].w = x;
+			T[1].w = y;
+			T[2].w = z;
+			this->model = model * T;
+		}
+
+		void rotate(int eixo, float graus) {
+			glm::mat4 R(1.0f);
+			graus = (graus * 3.14)/180;
+			switch(eixo) {
+				case 0: 
+					R[1] = glm::vec4(0,cos(graus),-sin(graus),0);
+					R[2] = glm::vec4(0,sin(graus),cos(graus),0);	
+					break;
+				case 1:
+					R[0] = glm::vec4(cos(graus),0,sin(graus),0);
+					R[2] = glm::vec4(sin(graus),0,cos(graus),0);
+					break;
+				case 2:
+					R[0] = glm::vec4(cos(graus),-sin(graus),0,0);
+					R[1] = glm::vec4(sin(graus),cos(graus),0,0);
+					break;
+			}
+
+			this->model = model * R;
+		}
+
+		void scale(float x, float y,float z) {
+			glm::mat4 S(1.0f);
+			if(x != 0){
+				S[0].x = x;
+			}
+			if(y != 0) {
+				S[1].y = y;
+			}
+			if(z != 0) {
+				S[2].z = z;
+			}
+			this->model = model * S;
+		}
 	
 	private:
 		glm::mat4 model = glm::mat4(1.0);
