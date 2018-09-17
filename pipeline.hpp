@@ -165,7 +165,7 @@ class Pipeline {
 					break;
 				case 1:
 					R[0] = glm::vec4(cos(graus),0,sin(graus),0);
-					R[2] = glm::vec4(sin(graus),0,cos(graus),0);
+					R[2] = glm::vec4(-sin(graus),0,cos(graus),0);
 					break;
 				case 2:
 					R[0] = glm::vec4(cos(graus),-sin(graus),0,0);
