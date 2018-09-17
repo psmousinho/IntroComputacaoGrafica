@@ -404,7 +404,6 @@ std::vector<glm::vec4> transformMesh(std::vector<glm::vec4> vertices) {
 		vertices[i] = vertices[i] / vertices[i].w;
 	}
 	return vertices;
-}return vertices;
 }
 ```
 
