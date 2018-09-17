@@ -14,11 +14,15 @@ typedef int color[4];
 color red = {255,0,0,255};
 color green = {0,255,0,255};
 color blue = {0,0,255,255};
+color black = {0,0,0,255};
 
 //#######################################################
 	//primitivas:
  
 void putPixel(int x, int y, color c) {
+	if(x < 0 || x >= IMAGE_WIDTH || y < 0 || y >= IMAGE_HEIGHT) {
+		return;
+	}
 	FBptr[x*4 + y*4*IMAGE_WIDTH] = c[0];
 	FBptr[x*4 + y*4*IMAGE_WIDTH + 1] = c[1];
 	FBptr[x*4 + y*4*IMAGE_WIDTH + 2] = c[2];
@@ -26,10 +30,15 @@ void putPixel(int x, int y, color c) {
 }
 
 void putPixel(pixel p, color c) {
-	FBptr[p.x*4 + p.y*4*IMAGE_WIDTH] = c[0];
-	FBptr[p.x*4 + p.y*4*IMAGE_WIDTH + 1] = c[1];
-	FBptr[p.x*4 + p.y*4*IMAGE_WIDTH + 2] = c[2];
-	FBptr[p.x*4 + p.y*4*IMAGE_WIDTH + 3] = c[3];
+	putPixel(p.x,p.y,c);
+}
+
+void clear() {
+	for(int i = 0; i < IMAGE_WIDTH; i++) {
+		for(int j = 0; j < IMAGE_HEIGHT; j++) {
+			putPixel(i,j,black);
+		}
+	}
 }
 
 void interpolar(float per,color atual, color inicial, color fin) {
