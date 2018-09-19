@@ -76,8 +76,6 @@ std::vector<glm::vec4> loadMesh(const std::string &file_name ) {
 //---------------------------------------------------------------
 void display(void)
 {
-
-	
 	glClear (GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	glViewport(0, 0, 512, 512);
@@ -85,18 +83,15 @@ void display(void)
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
 
-    gluPerspective(90.0f, 1.0f, 0.1f, 100.0f );
-	gluLookAt(	0.0f, 3.0f, 3.0f,
-				0.0f, 0.0f, 0.0f,
-		        0.0f, 1.0f, 0.0f);
+    	gluPerspective(90.0f, 1.0f, 0.1f, 100.0f );
+	gluLookAt(0.0f, 3.0f, 3.0f,
+		  0.0f, 0.0f, 0.0f,
+		  0.0f, 1.0f, 0.0f);
 
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
-	glTranslatef(0,0,-1);
-	//glScalef(3,0.5,-1);
-
 	
-	std::string file_name = "Modelos//Esfera.obj";
+	std::string file_name = "Modelos//Suzanne.obj";
 	std::vector<glm::vec4> vertices = loadMesh(file_name);
 	
 	for (int i = 0; i < vertices.size(); i+=3) {
