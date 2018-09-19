@@ -419,6 +419,22 @@ std::vector<glm::vec4> transformMesh(std::vector<glm::vec4> vertices) {
 	return vertices;
 }
 ```
+#### Rasterização de Modelos:
+No cabeçalho mygl.h foi desenvolvido a função DrawMesh que recebe um objeto ja transformado e o rasteriz:
+```C++
+void drawMesh(std::vector<glm::vec4> vertices) {
+	pixel pi,pm,pf;
+	for (int i = 0; i < vertices.size(); i+=3) {
+		pi.x = (int) vertices[i].x;
+		pi.y = (int) vertices[i].y;
+		pm.x = (int) vertices[i+1].x;
+		pm.y = (int) vertices[i+1].y;
+		pf.x = (int) vertices[i+2].x;
+		pf.y = (int) vertices[i+2].y;
+		drawTriangle(pi,pm,pf,blue);
+	}
+}
+```
 
 ### Resultados:
 Aqui podemos ver os resultados do nosso pipeline em comparação com a rasterização do openGl. Nossos modelos estão em azul e os do openGl em vermelho.
