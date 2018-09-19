@@ -215,7 +215,7 @@ Os resultados desse projeto podem ser vistos nas imagens abaixo. Os maiores desa
 O pipeline gráfico é uma sequência de transformações geométricas que levam a descrição matemática de um modelo do espaço onde ele é desenvolvido (espaco do objeto) para o espaço que representa a tela do computador(espaço de tela). Nosso pipeline é composto de 4 multiplicações por matrizes e uma divisão por escalar. Esse pipeline foi implementado dentro de uma classe. Dentro desta classe temos métodos para Configurar e acessar as 4 matrizes utilizadas no pipeline.
 
 #### Matriz model:
-essa matriz é responsável por levar a descrição do objeto do espaço do objeto paras o espaço do mundo onde são colocados todos os  objetos que queremos dentro de uma cena. Essa matriz é composta de translações, rotaçoes, escalas e cisalhamentos. Ela pode ser acessada e modificada pelos métodos a seguir:
+Essa matriz é responsável por levar a descrição do objeto do espaço do objeto paras o espaço do mundo onde são colocados todos os  objetos que queremos dentro de uma cena. Essa matriz é composta de translações, rotaçoes, escalas e cisalhamentos. Ela pode ser acessada e modificada pelos métodos a seguir:
 
 ```C++
 void setModel(glm::mat4 mat) {
@@ -264,14 +264,16 @@ void rotate(int eixo, float graus) {
 			R[0] = glm::vec4(cos(graus),-sin(graus),0,0);
 			R[1] = glm::vec4(sin(graus),cos(graus),0,0);
 			break;
+		default:
+			printf("Valor invalido");
+			return;
 	}
-
 	this->model = model * R;
 }
 ```
 
 #### Matrizes view e projection:
-Essas matrizes têm haver com como iremos observar a cena. A matriz view é definida pela posição da câmera, pela direção em que ela está olhando e qual a direção de cima dela. A matriz projection é a responsável por criar a ilusão de perspectiva,” o que está mais perto se torna maior e o que está mais longe se torna menor”, Ela é definida pela distância focal da câmera. Essas duas matrizes podem ser configuradas e acessadas pelos métodos a seguir:
+Essas matrizes têm haver com como iremos observar a cena. A matriz view é definida pela posição da câmera, pela direção em que ela está olhando e qual a direção de cima dela. A matriz projection é a responsável por criar a ilusão de perspectiva,”o que está mais perto se torna maior e o que está mais longe se torna menor”, Ela é definida pela distância focal da câmera. Essas duas matrizes podem ser configuradas e acessadas pelos métodos a seguir:
 
 ```C++
 void setCamera(glm::vec3 position, glm::vec3 lookAt, glm::vec3 up, float focalDistance) {
