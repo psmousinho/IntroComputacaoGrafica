@@ -171,6 +171,9 @@ class Pipeline {
 					R[0] = glm::vec4(cos(graus),-sin(graus),0,0);
 					R[1] = glm::vec4(sin(graus),cos(graus),0,0);
 					break;
+				default:
+					printf("Valor invalido");
+					return;
 			}
 
 			this->model = model * R;
