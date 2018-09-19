@@ -31,8 +31,19 @@ class Pipeline {
 			this->model = mat;
 		}
 
-		void setViewport(glm::mat4 mat) {
-			this->viewport = mat;
+		void setViewport(int width, int height) {
+			glm::mat4 S1 = glm::mat4(1.0);
+			S1[1] = glm::vec4(0,-1,0,0);
+
+			glm::mat4 T = glm::mat4(1.0);
+			T[0] = glm::vec4(1,0,0,1);
+			T[1] = glm::vec4(0,1,0,1);
+
+			glm::mat4 S2 = glm::mat4(1.0);
+			S2[0] = glm::vec4((width-1)/2,0,0,0);
+			S2[1] = glm::vec4(0,(height-1)/2,0,0);
+		
+			this->viewport = S1 * T * S2 ;
 		}
 
 		void setCamera(glm::vec3 position, glm::vec3 lookAt, glm::vec3 up, float focalDistance) {
